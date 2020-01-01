@@ -21,13 +21,12 @@ class cube(object):
         self.pos = (self.pos[0] + dirnx, self.pos[1] + dirny)
 
     def draw(self, surface, eyes = False):
-        #print("ASDASD{} {} {}\n".format(self.color, self.pos, self.w))
         dis = self.w//self.roWs
         
         i = self.pos[0]
         j = self.pos[1]
 
-        pygame.draw.rect(surface, (255,0,0), (i*dis+1, j*dis+1, dis-1, dis-1))
+        pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-1, dis-1))
 
         if eyes:
             center = dis//2
@@ -179,7 +178,7 @@ def main():
     win = pygame.display.set_mode((width, width))
 
     s = snek((255,0,0), (10,10))
-    snack = cube(randomSnack(rows, s), color=(0,255,0))
+    snack = cube(randomSnack(rows, s), color=(0,0,255))
 
     flag = True
     clock = pygame.time.Clock()
@@ -193,7 +192,7 @@ def main():
         s.move()
         if s.body[0].pos == snack.pos:
             s.addCube()
-            snack = cube(randomSnack(rows, s), color=(0,255,0))
+            snack = cube(randomSnack(rows, s), color=(0,0,255))
 
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z:z.pos, s.body[x+1:])):
